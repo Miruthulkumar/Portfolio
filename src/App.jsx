@@ -9,12 +9,25 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollProgress from "./components/ScrollProgress";
+import SakuraPetals from "./components/SakuraPetals";
+import { useLanguageTheme } from "./context/LanguageThemeContext";
 
 export default function App() {
+  const { mode, isJapanese } = useLanguageTheme();
+
   return (
-    <div className="site-shell min-h-screen text-[var(--paper-100)]">
+    <div
+      className={`site-shell site-mode-${mode} min-h-screen text-[var(--paper-100)]`}
+    >
       <div className="pointer-events-none fixed inset-0 z-0 grid-texture opacity-35" />
       <div className="pointer-events-none fixed inset-x-0 top-0 z-0 h-44 bg-gradient-to-b from-white/[0.05] to-transparent" />
+      {isJapanese ? (
+        <>
+          <div className="sakura-haze pointer-events-none fixed inset-0 z-0" />
+          <div className="sakura-lines pointer-events-none fixed inset-0 z-0" />
+        </>
+      ) : null}
+      <SakuraPetals />
 
       <ScrollProgress />
       <Navbar />

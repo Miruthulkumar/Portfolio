@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -16,6 +16,30 @@
   --line-faint: rgba(255, 255, 255, 0.08);
   --accent-400: #88abff;
   --accent-500: #6f97ff;
+  --toggle-bg: rgba(255, 255, 255, 0.02);
+  --toggle-active-bg: rgba(255, 255, 255, 0.14);
+  --toggle-active-text: #f8f7f4;
+  --toggle-inactive-text: rgba(243, 240, 232, 0.68);
+  --sakura-petal: rgba(255, 255, 255, 0);
+}
+
+:root[data-portfolio-mode="ja"] {
+  color-scheme: light;
+  --ink-950: #fffaf7;
+  --ink-900: #fff7f3;
+  --ink-850: #fdf1ed;
+  --paper-100: #242124;
+  --paper-200: #5b5558;
+  --muted-500: #8f7d85;
+  --line-soft: rgba(145, 116, 128, 0.2);
+  --line-faint: rgba(145, 116, 128, 0.12);
+  --accent-400: #d68ea8;
+  --accent-500: #c97998;
+  --toggle-bg: rgba(255, 255, 255, 0.78);
+  --toggle-active-bg: rgba(201, 121, 152, 0.2);
+  --toggle-active-text: #4b2f3a;
+  --toggle-inactive-text: rgba(75, 47, 58, 0.7);
+  --sakura-petal: rgba(227, 164, 188, 0.46);
 }
 
 html {
@@ -35,6 +59,25 @@ body {
     linear-gradient(132deg, #0a0b0d 0%, #101216 52%, #0c0e12 100%);
   color: var(--paper-100);
   text-rendering: optimizeLegibility;
+  transition:
+    background 0.6s ease,
+    color 0.4s ease;
+}
+
+:root[data-portfolio-mode="ja"] body {
+  font-family: "Noto Sans JP", "Manrope", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(
+      circle at 10% -10%,
+      rgba(246, 220, 229, 0.58) 0%,
+      rgba(246, 220, 229, 0) 34%
+    ),
+    radial-gradient(
+      circle at 88% 0%,
+      rgba(252, 231, 238, 0.75) 0%,
+      rgba(252, 231, 238, 0) 42%
+    ),
+    linear-gradient(145deg, #fffdfb 0%, #fff7f5 55%, #fef5f1 100%);
 }
 
 ::selection {
@@ -42,9 +85,18 @@ body {
   color: #ffffff;
 }
 
+:root[data-portfolio-mode="ja"] ::selection {
+  background: rgba(201, 121, 152, 0.26);
+  color: #2f2529;
+}
+
 * {
   scrollbar-width: thin;
   scrollbar-color: rgba(111, 151, 255, 0.45) transparent;
+}
+
+:root[data-portfolio-mode="ja"] * {
+  scrollbar-color: rgba(201, 121, 152, 0.5) transparent;
 }
 
 @layer base {
@@ -60,11 +112,20 @@ body {
   p {
     text-wrap: pretty;
   }
+
+  :root[data-portfolio-mode="ja"] h1,
+  :root[data-portfolio-mode="ja"] h2,
+  :root[data-portfolio-mode="ja"] h3,
+  :root[data-portfolio-mode="ja"] h4 {
+    font-family: "Noto Sans JP", "Manrope", "Segoe UI", sans-serif;
+    letter-spacing: -0.02em;
+  }
 }
 
 @layer components {
   .site-shell {
     @apply relative isolate overflow-x-hidden;
+    transition: background-color 0.5s ease;
   }
 
   .layout-wrap {
@@ -97,6 +158,18 @@ body {
     @apply rounded-2xl border border-[color:var(--line-soft)] bg-[rgba(255,255,255,0.03)];
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(8px);
+    transition:
+      background-color 0.35s ease,
+      border-color 0.35s ease,
+      box-shadow 0.35s ease,
+      transform 0.35s ease;
+  }
+
+  :root[data-portfolio-mode="ja"] .surface-card {
+    background: rgba(255, 255, 255, 0.68);
+    box-shadow: 0 18px 34px rgba(172, 140, 152, 0.16);
+    backdrop-filter: blur(3px);
+    border-radius: 1.2rem;
   }
 
   .elevate-hover {
@@ -111,10 +184,18 @@ body {
 
   .outline-frame {
     @apply border border-[color:var(--line-soft)];
+    transition: border-color 0.35s ease;
   }
 
   .btn-line {
-    @apply inline-flex items-center gap-2 border-b border-[color:var(--line-soft)] pb-1 text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-[var(--paper-100)] transition duration-300 hover:border-[var(--accent-400)] hover:text-white;
+    @apply inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-[var(--paper-100)] transition duration-300 hover:-translate-y-0.5 hover:border-[var(--accent-400)] hover:text-white;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  :root[data-portfolio-mode="ja"] .btn-line {
+    @apply rounded-full border px-4 py-2 text-[0.66rem] tracking-[0.12em] hover:text-[var(--paper-100)];
+    border-bottom-width: 1px;
+    background: rgba(255, 255, 255, 0.64);
   }
 
   .btn-solid {
@@ -128,10 +209,24 @@ body {
     background: var(--accent-400);
   }
 
+  :root[data-portfolio-mode="ja"] .btn-solid {
+    color: #4b2f3a;
+    background: color-mix(in oklab, var(--accent-500) 68%, white);
+  }
+
+  :root[data-portfolio-mode="ja"] .btn-solid:hover {
+    background: color-mix(in oklab, var(--accent-400) 72%, white);
+  }
+
   .chip {
     @apply rounded-full border px-3 py-1.5 text-[0.64rem] font-semibold uppercase tracking-[0.16em];
     border-color: var(--line-soft);
     color: color-mix(in oklab, var(--paper-200) 90%, transparent);
+  }
+
+  :root[data-portfolio-mode="ja"] .chip {
+    @apply text-[0.62rem] tracking-[0.1em];
+    background: rgba(255, 255, 255, 0.56);
   }
 
   .grid-texture {
@@ -149,8 +244,43 @@ body {
     background-size: 78px 78px;
   }
 
+  :root[data-portfolio-mode="ja"] .grid-texture {
+    background-image:
+      linear-gradient(to right, rgba(157, 128, 141, 0.09) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(157, 128, 141, 0.09) 1px, transparent 1px);
+    background-size: 92px 92px;
+    opacity: 0.26;
+  }
+
   .display-name {
     @apply pointer-events-none select-none font-semibold uppercase leading-[0.8] tracking-[-0.045em] text-white/[0.06];
     font-size: clamp(3.5rem, 14vw, 9rem);
+  }
+
+  :root[data-portfolio-mode="ja"] .display-name {
+    color: rgba(138, 110, 122, 0.09);
+  }
+
+  .sakura-haze {
+    background:
+      radial-gradient(
+        circle at 11% 18%,
+        rgba(255, 230, 238, 0.64),
+        rgba(255, 230, 238, 0) 34%
+      ),
+      radial-gradient(
+        circle at 86% 86%,
+        rgba(255, 224, 236, 0.55),
+        rgba(255, 224, 236, 0) 36%
+      );
+  }
+
+  .sakura-lines {
+    background-image:
+      linear-gradient(135deg, rgba(204, 166, 182, 0.08) 1px, transparent 1px),
+      linear-gradient(45deg, rgba(204, 166, 182, 0.05) 1px, transparent 1px);
+    background-size: 120px 120px;
+    mix-blend-mode: multiply;
+    opacity: 0.28;
   }
 }

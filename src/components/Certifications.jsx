@@ -1,7 +1,12 @@
 import { motion } from "framer-motion";
 import { achievements, certifications } from "../data/portfolioData";
+import { modeContent } from "../data/translations";
+import { useLanguageTheme } from "../context/LanguageThemeContext";
 
 export default function Certifications() {
+  const { mode } = useLanguageTheme();
+  const copy = modeContent[mode];
+
   return (
     <section
       id="certifications"
@@ -13,10 +18,8 @@ export default function Certifications() {
         viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 0.56 }}
       >
-        <p className="eyebrow">Credentials</p>
-        <h2 className="section-title max-w-5xl">
-          Certifications and achievements as milestones.
-        </h2>
+        <p className="eyebrow">{copy.certifications.eyebrow}</p>
+        <h2 className="section-title max-w-5xl">{copy.certifications.title}</h2>
       </motion.div>
 
       <div className="mt-12 grid gap-8 lg:grid-cols-[0.94fr_1.06fr]">
@@ -28,7 +31,7 @@ export default function Certifications() {
           className="surface-card p-7 sm:p-8"
         >
           <h3 className="text-2xl font-semibold text-[var(--paper-100)]">
-            Certifications
+            {copy.certifications.certifications}
           </h3>
 
           <ol className="mt-8 space-y-3">
@@ -56,7 +59,7 @@ export default function Certifications() {
           className="surface-card p-7 sm:p-8"
         >
           <h3 className="text-2xl font-semibold text-[var(--paper-100)]">
-            Achievements
+            {copy.certifications.achievements}
           </h3>
 
           <div className="mt-8 space-y-3">
@@ -67,7 +70,8 @@ export default function Certifications() {
                 className="rounded-xl border border-[color:var(--line-faint)] bg-white/[0.02] p-4"
               >
                 <p className="text-[0.6rem] font-semibold uppercase tracking-[0.22em] text-[var(--muted-500)]">
-                  Highlight {String(index + 1).padStart(2, "0")}
+                  {copy.certifications.highlight}{" "}
+                  {String(index + 1).padStart(2, "0")}
                 </p>
                 <p className="mt-2 text-[0.98rem] leading-7 text-[var(--paper-200)]/82">
                   {item}
