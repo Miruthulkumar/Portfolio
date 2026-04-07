@@ -1,7 +1,12 @@
 import { motion } from "framer-motion";
 import { skillCategories } from "../data/portfolioData";
+import { modeContent } from "../data/translations";
+import { useLanguageTheme } from "../context/LanguageThemeContext";
 
 export default function Skills() {
+  const { mode } = useLanguageTheme();
+  const copy = modeContent[mode];
+
   return (
     <section id="skills" className="flow-section section-space layout-wrap">
       <motion.div
@@ -10,10 +15,8 @@ export default function Skills() {
         viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 0.58 }}
       >
-        <p className="eyebrow">Skills</p>
-        <h2 className="section-title max-w-5xl">
-          Technical capability, structured by craft.
-        </h2>
+        <p className="eyebrow">{copy.skills.eyebrow}</p>
+        <h2 className="section-title max-w-5xl">{copy.skills.title}</h2>
       </motion.div>
 
       <div className="mt-14 border-t border-[color:var(--line-soft)]">

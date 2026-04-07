@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, Download } from "lucide-react";
-import { navItems, resumePath } from "../data/portfolioData";
+import { resumePath } from "../data/portfolioData";
+import { modeContent } from "../data/translations";
+import LanguageToggle from "./LanguageToggle";
+import { useLanguageTheme } from "../context/LanguageThemeContext";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { mode, isJapanese } = useLanguageTheme();
+  const copy = modeContent[mode];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -30,28 +35,34 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-50 border-b transition duration-300 ${
         scrolled
-          ? "border-white/10 bg-[#11151d]/82 backdrop-blur-xl"
+          ? "border-white/10 bg-[var(--ink-900)]/82 backdrop-blur-xl"
           : "border-transparent bg-transparent"
       }`}
     >
       <div className="layout-wrap flex h-[4.65rem] items-center justify-between gap-4">
         <a href="#home" className="group flex items-center gap-3">
           <div className="flex h-9 w-9 items-center justify-center rounded-full border border-[color:var(--line-soft)] bg-white/[0.03] text-[0.62rem] font-semibold tracking-[0.18em] text-[var(--paper-100)] transition group-hover:border-[var(--accent-400)]">
-            MK
+            {isJapanese ? "宮" : "MK"}
           </div>
           <div>
-            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.25em] text-[var(--paper-100)]">
+            <p
+              className={`text-[0.72rem] font-semibold text-[var(--paper-100)] ${
+                isJapanese ? "tracking-[0.08em]" : "uppercase tracking-[0.25em]"
+              }`}
+            >
               Miruthul Kumar
             </p>
           </div>
         </a>
 
         <nav className="hidden items-center gap-8 lg:flex">
-          {navItems.map((item) => (
+          {copy.nav.map((item) => (
             <a
               key={item.label}
               href={item.href}
-              className="group relative text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-[var(--paper-200)]/75 transition hover:text-[var(--paper-100)]"
+              className={`group relative text-[0.7rem] font-semibold text-[var(--paper-200)]/82 transition hover:text-[var(--paper-100)] ${
+                isJapanese ? "tracking-[0.08em]" : "uppercase tracking-[0.24em]"
+              }`}
             >
               {item.label}
               <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-[var(--accent-500)] transition-all duration-300 group-hover:w-full" />
@@ -60,9 +71,14 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <a href={resumePath} download className="btn-line">
+          <LanguageToggle />
+          <a
+            href={resumePath}
+            download
+            className={`btn-line ${isJapanese ? "" : "h-9 px-4 py-1.5"}`}
+          >
             <Download className="h-4 w-4" />
-            Resume
+            {copy.navbar.resume}
           </a>
         </div>
 
@@ -84,15 +100,22 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.25 }}
-            className="border-t border-white/10 bg-[#11151d]/95 px-4 py-5 backdrop-blur-xl lg:hidden"
+            className="border-t border-white/10 bg-[var(--ink-900)]/95 px-4 py-5 backdrop-blur-xl lg:hidden"
           >
             <div className="layout-wrap space-y-3 px-0">
-              {navItems.map((item) => (
+              <div className="pb-2">
+                <LanguageToggle compact />
+              </div>
+              {copy.nav.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-xl border border-white/10 px-4 py-3 text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-[var(--paper-100)] transition hover:border-[var(--accent-400)]"
+                  className={`block rounded-xl border border-white/10 px-4 py-3 text-[0.7rem] font-semibold text-[var(--paper-100)] transition hover:border-[var(--accent-400)] ${
+                    isJapanese
+                      ? "tracking-[0.08em]"
+                      : "uppercase tracking-[0.22em]"
+                  }`}
                 >
                   {item.label}
                 </a>
@@ -103,7 +126,7 @@ export default function Navbar() {
                 className="btn-solid w-full justify-center"
               >
                 <Download className="h-4 w-4" />
-                Download Resume
+                {copy.navbar.downloadResume}
               </a>
             </div>
           </motion.div>

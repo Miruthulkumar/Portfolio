@@ -8,8 +8,13 @@ import {
   Phone,
 } from "lucide-react";
 import { contact, resumePath } from "../data/portfolioData";
+import { modeContent } from "../data/translations";
+import { useLanguageTheme } from "../context/LanguageThemeContext";
 
 export default function Contact() {
+  const { mode } = useLanguageTheme();
+  const copy = modeContent[mode];
+
   const emailSubject = encodeURIComponent("Portfolio Inquiry");
   const emailBody = encodeURIComponent(
     "Hi Miruthul,\n\nI found your portfolio and would like to connect.\n\nThanks,",
@@ -41,10 +46,8 @@ export default function Contact() {
         viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 0.56 }}
       >
-        <p className="eyebrow">Contact</p>
-        <h2 className="section-title max-w-6xl">
-          Let&apos;s build something meaningful together.
-        </h2>
+        <p className="eyebrow">{copy.contact.eyebrow}</p>
+        <h2 className="section-title max-w-6xl">{copy.contact.title}</h2>
       </motion.div>
 
       <div className="mt-12 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
@@ -58,12 +61,12 @@ export default function Contact() {
           <div className="space-y-3 text-[var(--paper-200)]/85">
             <ContactItem
               icon={MapPin}
-              label="Location"
+              label={copy.contact.location}
               value={contact.location}
             />
             <ContactItem
               icon={Mail}
-              label="Email"
+              label={copy.contact.email}
               value={contact.email}
               href={openEmailHref}
               target={openEmailTarget}
@@ -71,20 +74,20 @@ export default function Contact() {
             />
             <ContactItem
               icon={Phone}
-              label="Phone"
+              label={copy.contact.phone}
               value={contact.phone}
               href={`tel:${contact.phone.replace(/\s+/g, "")}`}
             />
             <ContactItem
               icon={Mail}
-              label="Languages"
+              label={copy.contact.languages}
               value={contact.languages.join(", ")}
             />
           </div>
 
           <div className="mt-9 border-t border-[color:var(--line-faint)] pt-6">
             <p className="text-[0.66rem] font-semibold uppercase tracking-[0.24em] text-[var(--muted-500)]">
-              Quick Links
+              {copy.contact.quickLinks}
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
               <a
@@ -112,14 +115,14 @@ export default function Contact() {
                 className="btn-line"
               >
                 <Mail className="h-4 w-4" />
-                Email
+                {copy.contact.email}
               </a>
             </div>
           </div>
 
           <div className="mt-8">
             <a href={resumePath} download className="btn-line">
-              Download Resume
+              {copy.contact.downloadResume}
               <ArrowUpRight className="h-4 w-4" />
             </a>
           </div>
@@ -133,7 +136,7 @@ export default function Contact() {
           className="surface-card p-7 sm:p-8"
         >
           <p className="text-[0.66rem] font-semibold uppercase tracking-[0.24em] text-[var(--muted-500)]">
-            Location Map
+            {copy.contact.locationMap}
           </p>
           <h3 className="mt-2 text-lg font-medium text-[var(--paper-100)]">
             Salem, Tamil Nadu

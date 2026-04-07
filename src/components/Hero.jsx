@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Download, Mail } from "lucide-react";
 import { hero, resumePath } from "../data/portfolioData";
+import { modeContent } from "../data/translations";
+import { useLanguageTheme } from "../context/LanguageThemeContext";
 
 const containerVariants = {
   hidden: {},
@@ -18,6 +20,8 @@ const itemVariants = {
 };
 
 export default function Hero() {
+  const { mode, isJapanese } = useLanguageTheme();
+  const copy = modeContent[mode];
   const primaryName = hero.name.split(" ")[0].toUpperCase();
 
   return (
@@ -29,7 +33,11 @@ export default function Hero() {
         variants={containerVariants}
         initial="hidden"
         animate="show"
-        className="relative grid gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:gap-12"
+        className={`relative grid gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:gap-12 ${
+          isJapanese
+            ? "rounded-3xl border border-[color:var(--line-faint)] bg-white/50 p-5 sm:p-8"
+            : ""
+        }`}
       >
         <motion.p
           variants={itemVariants}
@@ -40,7 +48,7 @@ export default function Hero() {
 
         <div className="relative">
           <motion.div variants={itemVariants} className="eyebrow">
-            Full Stack Developer / ECE Undergraduate
+            {copy.hero.eyebrow}
           </motion.div>
 
           <motion.h1
@@ -66,11 +74,11 @@ export default function Hero() {
           >
             <a href={resumePath} download className="btn-solid">
               <Download className="h-4 w-4" />
-              Resume
+              {copy.hero.resume}
             </a>
             <a href="#contact" className="btn-line">
               <Mail className="h-4 w-4" />
-              Contact
+              {copy.hero.contact}
               <ArrowRight className="h-4 w-4" />
             </a>
           </motion.div>
@@ -88,7 +96,11 @@ export default function Hero() {
         </div>
 
         <motion.aside variants={itemVariants} className="lg:pt-20">
-          <div className="surface-card relative overflow-hidden p-3">
+          <div
+            className={`surface-card relative overflow-hidden p-3 ${
+              isJapanese ? "border-[color:var(--line-soft)] bg-white/70" : ""
+            }`}
+          >
             <div className="absolute inset-x-0 top-0 h-px bg-[var(--accent-500)]/55" />
             <img
               src={hero.image}
@@ -97,7 +109,7 @@ export default function Hero() {
             />
           </div>
           <p className="mt-4 text-right text-[0.64rem] uppercase tracking-[0.24em] text-[var(--muted-500)]">
-            Salem, India
+            {copy.misc.salem}
           </p>
         </motion.aside>
       </motion.div>

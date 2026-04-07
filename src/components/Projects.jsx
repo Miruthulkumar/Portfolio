@@ -1,8 +1,13 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Github } from "lucide-react";
 import { projects } from "../data/portfolioData";
+import { modeContent } from "../data/translations";
+import { useLanguageTheme } from "../context/LanguageThemeContext";
 
 export default function Projects() {
+  const { mode } = useLanguageTheme();
+  const copy = modeContent[mode];
+
   return (
     <section id="projects" className="flow-section section-space layout-wrap">
       <motion.div
@@ -11,10 +16,8 @@ export default function Projects() {
         viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 0.6 }}
       >
-        <p className="eyebrow">Projects</p>
-        <h2 className="section-title max-w-6xl">
-          Selected projects presented as case studies.
-        </h2>
+        <p className="eyebrow">{copy.projects.eyebrow}</p>
+        <h2 className="section-title max-w-6xl">{copy.projects.title}</h2>
       </motion.div>
 
       <div className="mt-14 space-y-10">
@@ -64,7 +67,7 @@ export default function Projects() {
                   className="btn-line"
                 >
                   <Github className="h-4 w-4" />
-                  GitHub
+                  {copy.projects.github}
                 </a>
                 <a
                   href={project.viewLink}
@@ -72,7 +75,7 @@ export default function Projects() {
                   rel="noreferrer"
                   className="btn-solid"
                 >
-                  View
+                  {copy.projects.view}
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
               </div>
@@ -89,14 +92,14 @@ export default function Projects() {
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_9%,rgba(111,151,255,0.24),transparent_52%)]" />
               <div className="relative flex h-full flex-col justify-between">
                 <p className="text-[0.62rem] uppercase tracking-[0.22em] text-[var(--muted-500)]">
-                  Project Snapshot
+                  {copy.projects.snapshot}
                 </p>
                 <p className="max-w-sm text-xl font-semibold leading-tight text-[var(--paper-100)] sm:text-2xl">
                   {project.title}
                 </p>
                 <div className="flex items-end justify-between">
                   <p className="text-xs uppercase tracking-[0.22em] text-[var(--paper-200)]/72">
-                    {project.techStack.length} Technologies
+                    {project.techStack.length} {copy.projects.technologies}
                   </p>
                   <ArrowUpRight className="h-5 w-5 text-[var(--accent-400)] transition duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </div>
