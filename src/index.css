@@ -1,12 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
   color-scheme: dark;
-  --bg-deep: #0a0e27;
-  --bg-soft: #1a1f3a;
-  --text-main: #ffffff;
+  --ink-950: #0a0b0d;
+  --ink-900: #101216;
+  --paper-100: #f3f0e8;
+  --paper-200: #d8d4ca;
+  --muted-500: #9c9a94;
+  --line-soft: rgba(255, 255, 255, 0.13);
+  --line-faint: rgba(255, 255, 255, 0.08);
+  --accent-400: #88abff;
+  --accent-500: #6f97ff;
 }
 
 html {
@@ -15,28 +23,22 @@ html {
 
 body {
   margin: 0;
-  font-family:
-    "Manrope",
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-  background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1428 100%);
-  background-attachment: fixed;
-  color: var(--text-main);
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at 12% -2%, #20252f 0%, rgba(32, 37, 47, 0) 36%),
+    linear-gradient(130deg, #0a0b0d 0%, #101216 52%, #0c0e12 100%);
+  color: var(--paper-100);
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: rgba(139, 92, 246, 0.4);
+  background: rgba(111, 151, 255, 0.36);
   color: #ffffff;
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(139, 92, 246, 0.4) transparent;
+  scrollbar-color: rgba(111, 151, 255, 0.45) transparent;
 }
 
 @layer base {
@@ -44,51 +46,81 @@ body {
   h2,
   h3,
   h4 {
-    font-family:
-      "Sora",
-      "Manrope",
-      ui-sans-serif,
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      sans-serif;
-    letter-spacing: -0.03em;
+    font-family: "Space Grotesk", "Manrope", "Segoe UI", sans-serif;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
   }
 }
 
 @layer components {
-  .glass-card {
-    @apply rounded-2xl border border-white/10 bg-white/[0.03] shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.06] hover:shadow-[0_26px_70px_rgba(139,92,246,0.20)];
-    backdrop-filter: blur(10px);
+  .site-shell {
+    @apply relative isolate overflow-x-hidden;
   }
 
-  .section-shell {
-    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  .layout-wrap {
+    @apply mx-auto w-full max-w-[1380px] px-5 sm:px-8 lg:px-12;
   }
 
-  .section-padding {
-    @apply py-16 sm:py-20 lg:py-24 xl:py-28;
+  .section-space {
+    @apply py-20 sm:py-24 lg:py-28;
   }
 
   .flow-section {
     @apply scroll-mt-24 lg:scroll-mt-28;
   }
 
+  .eyebrow {
+    @apply text-[0.67rem] font-semibold uppercase tracking-[0.28em];
+    color: var(--muted-500);
+  }
+
   .section-title {
-    @apply text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl lg:leading-[1.1];
+    @apply mt-4 text-[2.3rem] font-semibold leading-[0.9] text-[var(--paper-100)] sm:text-[3.3rem] lg:text-[4.6rem];
   }
 
-  .section-subtitle {
-    @apply mt-4 max-w-2xl text-base leading-7 text-white/70 sm:text-lg sm:leading-8;
+  .section-copy {
+    @apply mt-5 text-base leading-8 sm:text-lg;
+    color: color-mix(in oklab, var(--paper-200) 84%, transparent);
   }
 
-  .premium-button {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-transparent px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/10 hover:shadow-[0_10px_30px_rgba(139,92,246,0.20)];
-    backdrop-filter: blur(10px);
+  .outline-frame {
+    @apply border border-[color:var(--line-soft)];
   }
 
-  .premium-button-solid {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-gradient-to-r from-violet-600 to-violet-500 px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:from-violet-500 hover:to-violet-400 hover:shadow-[0_14px_38px_rgba(139,92,246,0.35)] hover:border-white/30;
+  .btn-line {
+    @apply inline-flex items-center gap-2 border-b border-[color:var(--line-soft)] pb-1 text-sm font-semibold uppercase tracking-[0.2em] text-[var(--paper-100)] transition duration-300 hover:border-[var(--accent-400)] hover:text-white;
+  }
+
+  .btn-solid {
+    @apply inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-semibold transition duration-300 hover:-translate-y-0.5;
+    color: #081020;
+    background: var(--accent-500);
+    border-color: color-mix(in oklab, var(--accent-400) 75%, transparent);
+  }
+
+  .btn-solid:hover {
+    background: var(--accent-400);
+  }
+
+  .chip {
+    @apply rounded-full border px-3 py-1.5 text-[0.66rem] font-semibold uppercase tracking-[0.18em];
+    border-color: var(--line-soft);
+    color: color-mix(in oklab, var(--paper-200) 90%, transparent);
+  }
+
+  .grid-texture {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+
+  .display-name {
+    @apply pointer-events-none select-none font-semibold uppercase leading-[0.8] tracking-[-0.045em] text-white/[0.06];
+    font-size: clamp(4.4rem, 17vw, 14rem);
   }
 }
