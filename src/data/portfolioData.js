@@ -8,6 +8,7 @@ export const navItems = [
 ];
 
 export const resumePath = "/Miruthul_Kumar_Resume.pdf";
+export const japaneseResumePath = "/Miruthul_Kumar_Resume_JP.pdf";
 
 export const hero = {
   name: "Miruthul Kumar M",

@@ -7,13 +7,14 @@ import {
   MapPin,
   Phone,
 } from "lucide-react";
-import { contact, resumePath } from "../data/portfolioData";
+import { contact, japaneseResumePath, resumePath } from "../data/portfolioData";
 import { modeContent } from "../data/translations";
 import { useLanguageTheme } from "../context/LanguageThemeContext";
 
 export default function Contact() {
-  const { mode } = useLanguageTheme();
+  const { mode, isJapanese } = useLanguageTheme();
   const copy = modeContent[mode];
+  const currentResumePath = isJapanese ? japaneseResumePath : resumePath;
 
   const emailSubject = encodeURIComponent("Portfolio Inquiry");
   const emailBody = encodeURIComponent(
@@ -121,7 +122,7 @@ export default function Contact() {
           </div>
 
           <div className="mt-8">
-            <a href={resumePath} download className="btn-line">
+            <a href={currentResumePath} download className="btn-line">
               {copy.contact.downloadResume}
               <ArrowUpRight className="h-4 w-4" />
             </a>

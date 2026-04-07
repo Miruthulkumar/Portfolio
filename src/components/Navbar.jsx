@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, Download } from "lucide-react";
-import { resumePath } from "../data/portfolioData";
+import { japaneseResumePath, resumePath } from "../data/portfolioData";
 import { modeContent } from "../data/translations";
 import LanguageToggle from "./LanguageToggle";
 import { useLanguageTheme } from "../context/LanguageThemeContext";
@@ -11,6 +11,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const { mode, isJapanese } = useLanguageTheme();
   const copy = modeContent[mode];
+  const currentResumePath = isJapanese ? japaneseResumePath : resumePath;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -39,9 +40,17 @@ export default function Navbar() {
           : "border-transparent bg-transparent"
       }`}
     >
-      <div className="layout-wrap flex h-[4.65rem] items-center justify-between gap-4">
+      <div
+        className={`layout-wrap flex items-center justify-between gap-4 ${
+          isJapanese ? "h-[5rem]" : "h-[4.65rem]"
+        }`}
+      >
         <a href="#home" className="group flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full border border-[color:var(--line-soft)] bg-white/[0.03] text-[0.62rem] font-semibold tracking-[0.18em] text-[var(--paper-100)] transition group-hover:border-[var(--accent-400)]">
+          <div
+            className={`flex items-center justify-center rounded-full border border-[color:var(--line-soft)] bg-white/[0.03] text-[0.62rem] font-semibold tracking-[0.18em] text-[var(--paper-100)] transition group-hover:border-[var(--accent-400)] ${
+              isJapanese ? "h-10 w-10" : "h-9 w-9"
+            }`}
+          >
             {isJapanese ? "宮" : "MK"}
           </div>
           <div>
@@ -73,7 +82,7 @@ export default function Navbar() {
         <div className="hidden items-center gap-3 lg:flex">
           <LanguageToggle />
           <a
-            href={resumePath}
+            href={currentResumePath}
             download
             className={`btn-line ${isJapanese ? "" : "h-9 px-4 py-1.5"}`}
           >
@@ -121,7 +130,7 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-                href={resumePath}
+                href={currentResumePath}
                 download
                 className="btn-solid w-full justify-center"
               >

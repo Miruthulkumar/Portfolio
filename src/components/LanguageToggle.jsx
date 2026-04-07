@@ -23,12 +23,19 @@ export default function LanguageToggle({ compact = false }) {
         onClick={() => setMode("ja")}
         label="日本語"
         compact={compact}
+        japaneseAccent
       />
     </div>
   );
 }
 
-function ToggleButton({ active, onClick, label, compact }) {
+function ToggleButton({
+  active,
+  onClick,
+  label,
+  compact,
+  japaneseAccent = false,
+}) {
   return (
     <motion.button
       type="button"
@@ -42,7 +49,26 @@ function ToggleButton({ active, onClick, label, compact }) {
           : "text-[var(--toggle-inactive-text)] hover:text-[var(--paper-100)]"
       }`}
     >
-      {label}
+      {japaneseAccent ? (
+        <motion.span
+          aria-hidden="true"
+          animate={{
+            scale: [1, 1.035, 1],
+            opacity: active ? [0.58, 0.74, 0.58] : [0.38, 0.52, 0.38],
+          }}
+          transition={{
+            duration: 2.2,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeInOut",
+          }}
+          className={`pointer-events-none absolute inset-1 rounded-full border border-[#b81f4b]/35 bg-white/80 ${
+            active ? "opacity-55" : "opacity-35"
+          }`}
+        >
+          <span className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#b81f4b]/85" />
+        </motion.span>
+      ) : null}
+      <span className="relative z-10">{label}</span>
     </motion.button>
   );
 }

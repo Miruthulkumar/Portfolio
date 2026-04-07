@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Download, Mail } from "lucide-react";
-import { hero, resumePath } from "../data/portfolioData";
+import { hero, japaneseResumePath, resumePath } from "../data/portfolioData";
 import { modeContent } from "../data/translations";
 import { useLanguageTheme } from "../context/LanguageThemeContext";
 
@@ -22,6 +22,7 @@ const itemVariants = {
 export default function Hero() {
   const { mode, isJapanese } = useLanguageTheme();
   const copy = modeContent[mode];
+  const currentResumePath = isJapanese ? japaneseResumePath : resumePath;
   const primaryName = hero.name.split(" ")[0].toUpperCase();
 
   return (
@@ -72,7 +73,7 @@ export default function Hero() {
             variants={itemVariants}
             className="mt-8 flex flex-wrap gap-3"
           >
-            <a href={resumePath} download className="btn-solid">
+            <a href={currentResumePath} download className="btn-solid">
               <Download className="h-4 w-4" />
               {copy.hero.resume}
             </a>
