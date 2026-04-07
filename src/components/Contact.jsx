@@ -10,6 +10,26 @@ import {
 import { contact, resumePath } from "../data/portfolioData";
 
 export default function Contact() {
+  const emailSubject = encodeURIComponent("Portfolio Inquiry");
+  const emailBody = encodeURIComponent(
+    "Hi Miruthul,\n\nI found your portfolio and would like to connect.\n\nThanks,",
+  );
+  const emailHref = `mailto:${contact.email}?subject=${emailSubject}&body=${emailBody}`;
+  const gmailComposeHref = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+    contact.email,
+  )}&su=${emailSubject}&body=${emailBody}`;
+
+  const openEmailHref =
+    typeof window !== "undefined" &&
+    window.navigator?.vendor?.includes("Google")
+      ? gmailComposeHref
+      : emailHref;
+
+  const openEmailTarget =
+    openEmailHref === gmailComposeHref ? "_blank" : undefined;
+  const openEmailRel =
+    openEmailHref === gmailComposeHref ? "noreferrer" : undefined;
+
   return (
     <section
       id="contact"
@@ -45,7 +65,9 @@ export default function Contact() {
               icon={Mail}
               label="Email"
               value={contact.email}
-              href={`mailto:${contact.email}`}
+              href={openEmailHref}
+              target={openEmailTarget}
+              rel={openEmailRel}
             />
             <ContactItem
               icon={Phone}
@@ -83,7 +105,12 @@ export default function Contact() {
                 <Linkedin className="h-4 w-4" />
                 LinkedIn
               </a>
-              <a href={contact.socials.email} className="btn-line">
+              <a
+                href={openEmailHref}
+                target={openEmailTarget}
+                rel={openEmailRel}
+                className="btn-line"
+              >
                 <Mail className="h-4 w-4" />
                 Email
               </a>
@@ -127,7 +154,7 @@ export default function Contact() {
   );
 }
 
-function ContactItem({ icon: Icon, label, value, href }) {
+function ContactItem({ icon: Icon, label, value, href, target, rel }) {
   const content = (
     <div className="flex items-start gap-4 border-b border-[color:var(--line-faint)] py-4 transition hover:border-[var(--accent-400)]">
       <div className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center border border-[color:var(--line-soft)] bg-white/[0.02] text-[var(--accent-400)]">
@@ -144,7 +171,7 @@ function ContactItem({ icon: Icon, label, value, href }) {
 
   if (href) {
     return (
-      <a href={href} className="block">
+      <a href={href} target={target} rel={rel} className="block">
         {content}
       </a>
     );
