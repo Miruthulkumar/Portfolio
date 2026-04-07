@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
@@ -11,13 +10,6 @@ import {
 import { contact, resumePath } from "../data/portfolioData";
 
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setSubmitted(true);
-  };
-
   return (
     <section
       id="contact"
@@ -91,7 +83,7 @@ export default function Contact() {
                 <Linkedin className="h-4 w-4" />
                 LinkedIn
               </a>
-              <a href={contact.socials.email} className="btn-solid">
+              <a href={contact.socials.email} className="btn-line">
                 <Mail className="h-4 w-4" />
                 Email
               </a>
@@ -106,56 +98,30 @@ export default function Contact() {
           </div>
         </motion.div>
 
-        <motion.form
-          onSubmit={handleSubmit}
+        <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.56, delay: 0.08 }}
           className="surface-card p-7 sm:p-8"
         >
-          <div className="grid gap-4 sm:grid-cols-2">
-            <InputField label="Name" name="name" placeholder="Your name" />
-            <InputField
-              label="Email"
-              name="email"
-              placeholder="you@example.com"
-              type="email"
+          <p className="text-[0.66rem] font-semibold uppercase tracking-[0.24em] text-[var(--muted-500)]">
+            Location Map
+          </p>
+          <h3 className="mt-2 text-lg font-medium text-[var(--paper-100)]">
+            Salem, Tamil Nadu
+          </h3>
+          <div className="mt-5 overflow-hidden rounded-xl border border-[color:var(--line-soft)]">
+            <iframe
+              title="Map of Salem, Tamil Nadu"
+              src="https://www.google.com/maps?q=Salem,Tamil+Nadu&output=embed"
+              className="h-[360px] w-full"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
             />
           </div>
-          <div className="mt-4">
-            <label
-              className="mb-2 block text-sm font-medium text-[var(--paper-100)]"
-              htmlFor="message"
-            >
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              rows="6"
-              placeholder="Write your message here..."
-              className="w-full rounded-xl border border-[color:var(--line-soft)] bg-white/[0.02] px-4 py-4 text-[var(--paper-100)] placeholder:text-[var(--muted-500)] outline-none transition focus:border-[var(--accent-400)]"
-            />
-          </div>
-
-          <div className="mt-6 flex justify-end">
-            <button type="submit" className="btn-solid">
-              Submit
-            </button>
-          </div>
-
-          {submitted ? (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mt-5 rounded-xl border border-[var(--accent-400)]/40 bg-[var(--accent-500)]/18 px-4 py-4 text-sm text-[var(--paper-100)]"
-            >
-              Message ready. Please use the email button or send a direct mail
-              to continue the conversation.
-            </motion.div>
-          ) : null}
-        </motion.form>
+        </motion.div>
       </div>
     </section>
   );
@@ -185,22 +151,4 @@ function ContactItem({ icon: Icon, label, value, href }) {
   }
 
   return content;
-}
-
-function InputField({ label, ...props }) {
-  return (
-    <div>
-      <label
-        className="mb-2 block text-sm font-medium text-[var(--paper-100)]"
-        htmlFor={props.name}
-      >
-        {label}
-      </label>
-      <input
-        {...props}
-        id={props.name}
-        className="w-full rounded-xl border border-[color:var(--line-soft)] bg-white/[0.02] px-4 py-4 text-[var(--paper-100)] outline-none transition placeholder:text-[var(--muted-500)] focus:border-[var(--accent-400)]"
-      />
-    </div>
-  );
 }
