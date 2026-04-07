@@ -24,7 +24,7 @@ export default function Skills() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.45, delay: index * 0.03 }}
-            className="grid gap-4 border-b border-[color:var(--line-faint)] py-8 sm:grid-cols-[0.15fr_0.32fr_1fr] sm:gap-8"
+            className="grid gap-4 border-b border-[color:var(--line-faint)] py-7 sm:grid-cols-[0.12fr_0.28fr_1fr] sm:gap-7"
           >
             <p className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-[var(--muted-500)]">
               {String(index + 1).padStart(2, "0")}
@@ -34,12 +34,14 @@ export default function Skills() {
               {category.title}
             </h3>
 
-            <div className="flex flex-wrap gap-2.5">
-              {category.skills.map((skill) => (
-                <span key={skill} className="chip">
-                  {skill}
-                </span>
-              ))}
+            <div className="rounded-xl border border-[color:var(--line-faint)] bg-white/[0.02] p-4 sm:p-5">
+              <div className="flex flex-wrap gap-2.5">
+                {category.skills.map((skill) => (
+                  <span key={skill} className="chip">
+                    {skill}
+                  </span>
+                ))}
+              </div>
             </div>
           </motion.article>
         ))}

@@ -3,7 +3,7 @@ import { footer, navItems } from "../data/portfolioData";
 
 export default function Footer() {
   return (
-    <footer className="relative z-10 border-t border-[color:var(--line-faint)] bg-black/10">
+    <footer className="relative z-10 border-t border-[color:var(--line-faint)] bg-black/15">
       <div className="layout-wrap py-14">
         <div className="grid gap-8 md:grid-cols-[1.2fr_0.8fr] md:items-end">
           <div>
@@ -15,7 +15,7 @@ export default function Footer() {
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-3 md:justify-end">
+          <div className="flex flex-wrap gap-4 md:justify-end">
             {navItems.map((item) => (
               <a
                 key={item.label}

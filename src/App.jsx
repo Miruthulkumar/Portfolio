@@ -14,8 +14,7 @@ export default function App() {
   return (
     <div className="site-shell min-h-screen text-[var(--paper-100)]">
       <div className="pointer-events-none fixed inset-0 z-0 grid-texture opacity-35" />
-      <div className="pointer-events-none fixed inset-y-0 left-[9%] z-0 hidden w-px bg-white/[0.06] lg:block" />
-      <div className="pointer-events-none fixed inset-y-0 right-[7%] z-0 hidden w-px bg-white/[0.04] lg:block" />
+      <div className="pointer-events-none fixed inset-x-0 top-0 z-0 h-44 bg-gradient-to-b from-white/[0.05] to-transparent" />
 
       <ScrollProgress />
       <Navbar />

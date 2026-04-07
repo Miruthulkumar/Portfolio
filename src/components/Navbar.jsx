@@ -30,18 +30,18 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-50 border-b transition duration-300 ${
         scrolled
-          ? "border-white/10 bg-[#0f1218]/82 backdrop-blur-xl"
+          ? "border-white/10 bg-[#11151d]/82 backdrop-blur-xl"
           : "border-transparent bg-transparent"
       }`}
     >
       <div className="layout-wrap flex h-[4.65rem] items-center justify-between gap-4">
         <a href="#home" className="group flex items-center gap-3">
+          <div className="flex h-9 w-9 items-center justify-center rounded-full border border-[color:var(--line-soft)] bg-white/[0.03] text-[0.62rem] font-semibold tracking-[0.18em] text-[var(--paper-100)] transition group-hover:border-[var(--accent-400)]">
+            MK
+          </div>
           <div>
             <p className="text-[0.72rem] font-semibold uppercase tracking-[0.25em] text-[var(--paper-100)]">
               Miruthul Kumar
-            </p>
-            <p className="text-[0.62rem] uppercase tracking-[0.22em] text-[var(--muted-500)]">
-              Portfolio 2026
             </p>
           </div>
         </a>
@@ -68,7 +68,7 @@ export default function Navbar() {
 
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/[0.02] text-[var(--paper-100)] transition hover:border-[var(--accent-400)] lg:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--line-soft)] bg-white/[0.03] text-[var(--paper-100)] transition hover:border-[var(--accent-400)] lg:hidden"
           onClick={() => setOpen((value) => !value)}
           aria-expanded={open}
           aria-label="Toggle navigation menu"

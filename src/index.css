@@ -8,6 +8,7 @@
   color-scheme: dark;
   --ink-950: #0a0b0d;
   --ink-900: #101216;
+  --ink-850: #171a20;
   --paper-100: #f3f0e8;
   --paper-200: #d8d4ca;
   --muted-500: #9c9a94;
@@ -25,8 +26,13 @@ body {
   margin: 0;
   font-family: "Manrope", "Segoe UI", sans-serif;
   background:
-    radial-gradient(circle at 12% -2%, #20252f 0%, rgba(32, 37, 47, 0) 36%),
-    linear-gradient(130deg, #0a0b0d 0%, #101216 52%, #0c0e12 100%);
+    radial-gradient(circle at 12% -2%, #232836 0%, rgba(35, 40, 54, 0) 35%),
+    radial-gradient(
+      circle at 88% 120%,
+      rgba(111, 151, 255, 0.08) 0%,
+      rgba(111, 151, 255, 0) 36%
+    ),
+    linear-gradient(132deg, #0a0b0d 0%, #101216 52%, #0c0e12 100%);
   color: var(--paper-100);
   text-rendering: optimizeLegibility;
 }
@@ -66,7 +72,7 @@ body {
   }
 
   .section-space {
-    @apply py-20 sm:py-24 lg:py-28;
+    @apply py-20 sm:py-24 lg:py-24;
   }
 
   .flow-section {
@@ -79,7 +85,7 @@ body {
   }
 
   .section-title {
-    @apply mt-4 text-[2.3rem] font-semibold leading-[0.9] text-[var(--paper-100)] sm:text-[3.3rem] lg:text-[4.6rem];
+    @apply mt-4 text-[2.2rem] font-semibold leading-[0.92] text-[var(--paper-100)] sm:text-[3rem] lg:text-[3.9rem];
   }
 
   .section-copy {
@@ -87,16 +93,32 @@ body {
     color: color-mix(in oklab, var(--paper-200) 84%, transparent);
   }
 
+  .surface-card {
+    @apply rounded-2xl border border-[color:var(--line-soft)] bg-[rgba(255,255,255,0.03)];
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(8px);
+  }
+
+  .elevate-hover {
+    @apply transition duration-300;
+  }
+
+  .elevate-hover:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in oklab, var(--accent-400) 60%, var(--line-soft));
+    box-shadow: 0 26px 50px rgba(0, 0, 0, 0.3);
+  }
+
   .outline-frame {
     @apply border border-[color:var(--line-soft)];
   }
 
   .btn-line {
-    @apply inline-flex items-center gap-2 border-b border-[color:var(--line-soft)] pb-1 text-sm font-semibold uppercase tracking-[0.2em] text-[var(--paper-100)] transition duration-300 hover:border-[var(--accent-400)] hover:text-white;
+    @apply inline-flex items-center gap-2 border-b border-[color:var(--line-soft)] pb-1 text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-[var(--paper-100)] transition duration-300 hover:border-[var(--accent-400)] hover:text-white;
   }
 
   .btn-solid {
-    @apply inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-semibold transition duration-300 hover:-translate-y-0.5;
+    @apply inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-[0.78rem] font-semibold uppercase tracking-[0.12em] transition duration-300 hover:-translate-y-0.5;
     color: #081020;
     background: var(--accent-500);
     border-color: color-mix(in oklab, var(--accent-400) 75%, transparent);
@@ -107,20 +129,28 @@ body {
   }
 
   .chip {
-    @apply rounded-full border px-3 py-1.5 text-[0.66rem] font-semibold uppercase tracking-[0.18em];
+    @apply rounded-full border px-3 py-1.5 text-[0.64rem] font-semibold uppercase tracking-[0.16em];
     border-color: var(--line-soft);
     color: color-mix(in oklab, var(--paper-200) 90%, transparent);
   }
 
   .grid-texture {
     background-image:
-      linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-    background-size: 72px 72px;
+      linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.032) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.032) 1px,
+        transparent 1px
+      );
+    background-size: 78px 78px;
   }
 
   .display-name {
     @apply pointer-events-none select-none font-semibold uppercase leading-[0.8] tracking-[-0.045em] text-white/[0.06];
-    font-size: clamp(4.4rem, 17vw, 14rem);
+    font-size: clamp(3.5rem, 14vw, 9rem);
   }
 }

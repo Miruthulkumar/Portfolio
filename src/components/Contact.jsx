@@ -35,13 +35,13 @@ export default function Contact() {
         </h2>
       </motion.div>
 
-      <div className="mt-14 grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+      <div className="mt-12 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.56 }}
-          className="border-l border-[color:var(--line-soft)] pl-7 sm:pl-10"
+          className="surface-card p-7 sm:p-8"
         >
           <div className="space-y-3 text-[var(--paper-200)]/85">
             <ContactItem
@@ -68,11 +68,11 @@ export default function Contact() {
             />
           </div>
 
-          <div className="mt-10 border-t border-[color:var(--line-faint)] pt-6">
+          <div className="mt-9 border-t border-[color:var(--line-faint)] pt-6">
             <p className="text-[0.66rem] font-semibold uppercase tracking-[0.24em] text-[var(--muted-500)]">
               Quick Links
             </p>
-            <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-4 flex flex-wrap gap-3">
               <a
                 href={contact.socials.github}
                 target="_blank"
@@ -98,7 +98,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="mt-9">
+          <div className="mt-8">
             <a href={resumePath} download className="btn-line">
               Download Resume
               <ArrowUpRight className="h-4 w-4" />
@@ -112,7 +112,7 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.56, delay: 0.08 }}
-          className="outline-frame p-7 sm:p-8"
+          className="surface-card p-7 sm:p-8"
         >
           <div className="grid gap-4 sm:grid-cols-2">
             <InputField label="Name" name="name" placeholder="Your name" />
@@ -139,10 +139,7 @@ export default function Contact() {
             />
           </div>
 
-          <div className="mt-6 flex items-center justify-between gap-4">
-            <p className="text-sm text-[var(--paper-200)]/70">
-              This form is frontend-only and shows a success state on submit.
-            </p>
+          <div className="mt-6 flex justify-end">
             <button type="submit" className="btn-solid">
               Submit
             </button>

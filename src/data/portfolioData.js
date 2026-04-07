@@ -11,12 +11,11 @@ export const resumePath = "/Miruthul_Kumar_Resume.pdf";
 
 export const hero = {
   name: "Miruthul Kumar M",
-  headline:
-    "Aspiring Full Stack Developer | ECE Undergraduate | IoT & Web Development Enthusiast",
+  headline: "Full Stack Developer | ECE Undergraduate",
   intro:
-    "ECE undergraduate with hands-on experience in web development, IoT systems, and software problem-solving. Built projects involving full-stack development, embedded systems, and real-time monitoring using JavaScript, MERN stack fundamentals, Arduino, and ESP32.",
+    "I build clean full stack and IoT projects with focus on practical engineering and real-world usability.",
   image: "/profile.jpg",
-  badges: ["MERN Stack", "Java", "IoT Projects", "JLPT N4"],
+  badges: ["MERN", "Java", "IoT"],
 };
 
 export const about = {
