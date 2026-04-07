@@ -24,6 +24,7 @@ export default function Hero() {
   const copy = modeContent[mode];
   const currentResumePath = isJapanese ? japaneseResumePath : resumePath;
   const primaryName = hero.name.split(" ")[0].toUpperCase();
+  const shadowName = isJapanese ? "ミルスル" : primaryName;
 
   return (
     <section
@@ -44,7 +45,7 @@ export default function Hero() {
           variants={itemVariants}
           className="display-name absolute -top-8 right-0 hidden lg:block"
         >
-          {primaryName}
+          {shadowName}
         </motion.p>
 
         <div className="relative">
