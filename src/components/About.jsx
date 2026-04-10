@@ -13,6 +13,14 @@ const highlightDetails = [
 export default function About() {
   const { mode } = useLanguageTheme();
   const copy = modeContent[mode];
+  const localizedHighlights = copy.about.highlightsList;
+  const highlightItems =
+    localizedHighlights ??
+    about.highlights.map((item, index) => ({
+      label: item.label,
+      value: item.value,
+      detail: highlightDetails[index],
+    }));
 
   return (
     <section id="about" className="flow-section section-space layout-wrap">
@@ -26,12 +34,11 @@ export default function About() {
         >
           <p className="eyebrow">{copy.about.eyebrow}</p>
           <h2 className="section-title max-w-4xl">
-            {mode === "ja"
-              ? "私について"
-              : "I design and develop practical digital systems across web and IoT."}
+            {copy.about.title ??
+              "I design and develop practical digital systems across web and IoT."}
           </h2>
           <p className="section-copy max-w-2xl">
-            {about.internship.description}
+            {copy.about.description ?? about.internship.description}
           </p>
           <a href="#projects" className="btn-line mt-9">
             {copy.about.cta}
@@ -61,7 +68,7 @@ export default function About() {
           </div>
 
           <div className="mt-7 space-y-3">
-            {about.highlights.map((item, index) => (
+            {highlightItems.map((item, index) => (
               <div
                 key={item.label}
                 className="rounded-xl border border-[color:var(--line-faint)] bg-white/[0.02] px-4 py-4"
@@ -73,7 +80,7 @@ export default function About() {
                   {item.label}
                 </p>
                 <p className="mt-1 text-sm leading-7 text-[var(--paper-200)]/82">
-                  {highlightDetails[index]}
+                  {item.detail}
                 </p>
               </div>
             ))}
@@ -84,7 +91,7 @@ export default function About() {
               {copy.about.internship}
             </p>
             <p className="mt-2 text-sm leading-7 text-[var(--paper-200)]/82">
-              {about.internship.role}
+              {copy.about.internshipRole ?? about.internship.role}
             </p>
           </div>
         </motion.div>

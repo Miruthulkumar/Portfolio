@@ -23,6 +23,8 @@ export default function Hero() {
   const { mode, isJapanese } = useLanguageTheme();
   const copy = modeContent[mode];
   const currentResumePath = isJapanese ? japaneseResumePath : resumePath;
+  const headline = copy.hero.headline ?? hero.headline;
+  const intro = copy.hero.intro ?? hero.intro;
   const primaryName = hero.name.split(" ")[0].toUpperCase();
   const shadowName = isJapanese ? "ミルスル" : primaryName;
 
@@ -59,7 +61,7 @@ export default function Hero() {
           >
             {hero.name}
             <span className="mt-2 block whitespace-nowrap text-[0.42em] font-medium text-[var(--paper-200)]">
-              {hero.headline}
+              {headline}
             </span>
           </motion.h1>
 
@@ -67,7 +69,7 @@ export default function Hero() {
             variants={itemVariants}
             className="mt-7 max-w-2xl text-[1.02rem] leading-8 text-[var(--paper-200)]/82 sm:text-lg"
           >
-            {hero.intro}
+            {intro}
           </motion.p>
 
           <motion.div

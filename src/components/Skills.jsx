@@ -6,6 +6,7 @@ import { useLanguageTheme } from "../context/LanguageThemeContext";
 export default function Skills() {
   const { mode } = useLanguageTheme();
   const copy = modeContent[mode];
+  const localizedCategories = copy.skills.categories ?? skillCategories;
 
   return (
     <section id="skills" className="flow-section section-space layout-wrap">
@@ -20,7 +21,7 @@ export default function Skills() {
       </motion.div>
 
       <div className="mt-14 border-t border-[color:var(--line-soft)]">
-        {skillCategories.map((category, index) => (
+        {localizedCategories.map((category, index) => (
           <motion.article
             key={category.title}
             initial={{ opacity: 0, y: 18 }}

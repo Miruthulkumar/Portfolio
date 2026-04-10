@@ -15,11 +15,16 @@ export default function Contact() {
   const { mode, isJapanese } = useLanguageTheme();
   const copy = modeContent[mode];
   const currentResumePath = isJapanese ? japaneseResumePath : resumePath;
-
-  const emailSubject = encodeURIComponent("Portfolio Inquiry");
-  const emailBody = encodeURIComponent(
-    "Hi Miruthul,\n\nI found your portfolio and would like to connect.\n\nThanks,",
+  const locationValue = copy.contact.locationValue ?? contact.location;
+  const languagesList = copy.contact.languagesList ?? contact.languages;
+  const emailSubject = encodeURIComponent(
+    copy.contact.emailSubject ?? "Portfolio Inquiry",
   );
+  const emailBody = encodeURIComponent(
+    copy.contact.emailBody ??
+      "Hi Miruthul,\n\nI found your portfolio and would like to connect.\n\nThanks,",
+  );
+
   const emailHref = `mailto:${contact.email}?subject=${emailSubject}&body=${emailBody}`;
   const gmailComposeHref = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
     contact.email,
@@ -63,7 +68,7 @@ export default function Contact() {
             <ContactItem
               icon={MapPin}
               label={copy.contact.location}
-              value={contact.location}
+              value={locationValue}
             />
             <ContactItem
               icon={Mail}
@@ -82,7 +87,7 @@ export default function Contact() {
             <ContactItem
               icon={Mail}
               label={copy.contact.languages}
-              value={contact.languages.join(", ")}
+              value={languagesList.join(", ")}
             />
           </div>
 
@@ -140,11 +145,11 @@ export default function Contact() {
             {copy.contact.locationMap}
           </p>
           <h3 className="mt-2 text-lg font-medium text-[var(--paper-100)]">
-            Salem, Tamil Nadu
+            {copy.contact.mapLocationText ?? "Salem, Tamil Nadu"}
           </h3>
           <div className="mt-5 overflow-hidden rounded-xl border border-[color:var(--line-soft)]">
             <iframe
-              title="Map of Salem, Tamil Nadu"
+              title={copy.contact.mapIframeTitle ?? "Map of Salem, Tamil Nadu"}
               src="https://www.google.com/maps?q=Salem,Tamil+Nadu&output=embed"
               className="h-[360px] w-full"
               loading="lazy"
