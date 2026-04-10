@@ -7,6 +7,14 @@ import { useLanguageTheme } from "../context/LanguageThemeContext";
 export default function Projects() {
   const { mode } = useLanguageTheme();
   const copy = modeContent[mode];
+  const localizedProjects = (copy.projects.list ?? []).map(
+    (localized, index) => ({
+      ...projects[index],
+      ...localized,
+    }),
+  );
+  const projectList =
+    localizedProjects.length > 0 ? localizedProjects : projects;
 
   return (
     <section id="projects" className="flow-section section-space layout-wrap">
@@ -21,7 +29,7 @@ export default function Projects() {
       </motion.div>
 
       <div className="mt-14 space-y-10">
-        {projects.map((project, index) => (
+        {projectList.map((project, index) => (
           <motion.article
             key={project.title}
             initial={{ opacity: 0, y: 28 }}

@@ -6,6 +6,8 @@ import { useLanguageTheme } from "../context/LanguageThemeContext";
 export default function Certifications() {
   const { mode } = useLanguageTheme();
   const copy = modeContent[mode];
+  const certificationsList = copy.certifications.items ?? certifications;
+  const achievementsList = copy.certifications.achievementsList ?? achievements;
 
   return (
     <section
@@ -35,7 +37,7 @@ export default function Certifications() {
           </h3>
 
           <ol className="mt-8 space-y-3">
-            {certifications.map((item, index) => (
+            {certificationsList.map((item, index) => (
               <li
                 key={item}
                 className="flex gap-4 rounded-xl border border-[color:var(--line-faint)] bg-white/[0.02] p-4"
@@ -63,7 +65,7 @@ export default function Certifications() {
           </h3>
 
           <div className="mt-8 space-y-3">
-            {achievements.map((item, index) => (
+            {achievementsList.map((item, index) => (
               <motion.div
                 key={item}
                 whileHover={{ y: -2 }}
